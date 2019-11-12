@@ -1,7 +1,7 @@
 <template>
   <div class="q-pa-md">
       <div class="q-gutter-md">
-        <q-radio v-for="item in apiRes" :key="item.slug" :val="item.slug" :label="item.name" v-model="slug" />
+        <q-checkbox v-for="item in apiRes" :key="item.slug" :val="item.slug" :label="item.name" v-model="categories" />
       </div>
       <br>
       <div class="q-gutter-y-md column">
@@ -9,6 +9,14 @@
           filled
           v-model="name"
           label="가게이름"
+        />
+      </div>
+      <br>
+      <div class="q-gutter-y-md column">
+        <q-input
+          filled
+          v-model="slug"
+          label="slug (index로 쓸 영어 이름 ex)김밥천국의 경우 : kbHeaven)"
         />
       </div>
       <br>
@@ -35,6 +43,7 @@
             style="max-width: 300px"
             field-name="files"
             :auto-upload="true"
+            @uploaded="uploaded"
         />
       </div>
       <br>
@@ -72,10 +81,41 @@ export default {
         slug: this.slug,
         name: this.name,
         rating: this.rating,
-        categories: ['치킨'],
-        thumbnailSrc: '/f/1573473932656aW1hZ2VzLnBuZw==.png',
+        categories: this.categories,
+        thumbnailSrc: this.data.data[0].thumbnailSrc,
         desc: this.desc
       })
+        .then(res => {
+          this.$q.notify({
+            color: 'green-4',
+            textColor: 'white',
+            icon: 'cloud_done',
+            message: '저장 완료'
+          })
+          this.reset()
+        })
+        .catch(() => {
+          this.$q.notify({
+            color: 'red-5',
+            textColor: 'white',
+            icon: 'warning',
+            message: '모든 내용을 기입해주세요.'
+          })
+        })
+    },
+    uploaded (info) {
+      const xhr = info.xhr
+      const data = JSON.parse(xhr.response)
+      this.data = data
+    },
+    reset () {
+      this.slug = ''
+      this.name = ''
+      this.rating = 0
+      this.categories = []
+      this.thumbnailSrc = ''
+      this.desc = ''
+      // 파일 삭제 밑 빈칸 방지 alert 창 수정
     }
   }
 }

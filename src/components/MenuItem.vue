@@ -1,5 +1,5 @@
 <template>
-  <q-item :to="{path: `/list/${item.slug}`}">
+  <q-item :to="{path: `/${item.slug}`}">
     <q-item-section avatar />
     <q-item-section>
       <q-item-label>{{item.name}}</q-item-label>

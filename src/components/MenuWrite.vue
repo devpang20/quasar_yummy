@@ -1,5 +1,5 @@
 <template>
-  <q-item :to="'/write'">
+  <q-item to="/write">
     <q-item-section avatar>
       <q-icon name="chat" />
       </q-item-section>

@@ -36,16 +36,7 @@
           <menu-item v-for="item in apiRes" :key="item.slug" :item="item" />
         </q-expansion-item>
         <menu-write />
-        <q-item clickable tag="a" target="_blank" href="">
-          <q-item-section avatar>
-            <q-icon name="school" />
-          </q-item-section>
-          <q-item-section>
-            <q-item-label>Github</q-item-label>
-            <q-item-label caption>github.com/yummy</q-item-label>
-          </q-item-section>
-        </q-item>
-
+        <menu-push />
       </q-list>
     </q-drawer>
 
@@ -59,10 +50,11 @@
 
 import MenuItem from 'components/MenuItem.vue'
 import MenuWrite from 'components/MenuWrite.vue'
+import MenuPush from 'components/MenuPush.vue'
 
 export default {
   name: 'MyLayout',
-  components: { MenuItem, MenuWrite },
+  components: { MenuItem, MenuWrite, MenuPush },
   data () {
     return {
       leftDrawerOpen: false,
