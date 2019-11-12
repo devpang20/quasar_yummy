@@ -3,7 +3,7 @@
     <q-banner v-for="item in apiRes" :key="item.slug" :cal="item.slug" rounded class="bg-grey-3">
       <template v-slot:avatar>
         <img
-          src="https://cdn.quasar.dev/img/mountains.jpg"
+          :src="`http://yummy.taku.kr:5000${item.thumbnailSrc}`"
           style="width: 200px; height: 110px"
         >
       </template>
@@ -20,7 +20,7 @@
         readonly
       />
       <template v-slot:action>
-        <q-btn flat label="자세히 보기" />
+        <q-btn flat label="자세히 보기" :to="{path: `${item.categories}/${item.slug}`}"/>
       </template>
     </q-banner>
   </div>

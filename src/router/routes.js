@@ -7,7 +7,13 @@ const routes = [
       { path: '', component: () => import('pages/Index.vue') },
       { path: '/write', component: () => import('pages/Write.vue') },
       { path: '/push', component: () => import('pages/Push.vue') },
-      { path: '/:menu', component: () => import('pages/List.vue') }
+      {
+        path: '/:menu',
+        component: () => import('pages/List.vue'),
+        chidren: [
+          { path: '/:slug', component: () => import('pages/View.vue') }
+        ]
+      }
     ]
   }
 ]

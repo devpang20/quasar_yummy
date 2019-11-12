@@ -82,7 +82,7 @@ export default {
         name: this.name,
         rating: this.rating,
         categories: this.categories,
-        thumbnailSrc: this.data.data[0].thumbnailSrc,
+        thumbnailSrc: (this.data) ? this.data.data[0].thumbnailSrc : null,
         desc: this.desc
       })
         .then(res => {
