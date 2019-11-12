@@ -10,7 +10,7 @@ const routes = [
       {
         path: '/:menu',
         component: () => import('pages/List.vue'),
-        chidren: [
+        children: [
           { path: '/:slug', component: () => import('pages/View.vue') }
         ]
       }

@@ -53,6 +53,24 @@
 
 <script>
 export default {
+  data () {
+    return {
+      apiRes: ''
+    }
+  },
 
+  created () {
+    this.fecthData()
+  },
+
+  methods: {
+    fotchData () {
+      this.$axios.get(this.$route.path)
+        .then(res => {
+          this.apiRes = res.data.data
+          console.log(this.$route.path)
+        })
+    }
+  }
 }
 </script>

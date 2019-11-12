@@ -20,7 +20,7 @@
         readonly
       />
       <template v-slot:action>
-        <q-btn flat label="자세히 보기" :to="{path: `${item.categories}/${item.slug}`}"/>
+        <q-btn flat label="자세히 보기" :to="{path: `${$route.path}/${item.slug}`}"/>
       </template>
     </q-banner>
   </div>
