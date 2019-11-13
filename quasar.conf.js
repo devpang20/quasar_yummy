@@ -15,6 +15,8 @@ module.exports = function (ctx) {
       'app.scss'
     ],
 
+    htmlVariables: { mapApi: 'https://ssl.daumcdn.net/dmaps/map_js_init/roughmapLoader.js' },
+
     // https://github.com/quasarframework/quasar/tree/dev/extras
     extras: [
       // 'ionicons-v4',

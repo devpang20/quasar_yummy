@@ -48,7 +48,12 @@
       </div>
       <br>
       <p>지도</p>
-      <q-editor v-model="mapTag" min-height="5rem" />
+       <q-input
+        v-model="mapTag"
+        filled
+        type="textarea"
+        label="지도 api 호출 테그"
+      />
       <br>
       <p>상세설명</p>
       <q-editor v-model="descTag" min-height="5rem" />
