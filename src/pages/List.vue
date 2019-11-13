@@ -20,7 +20,7 @@
         readonly
       />
       <template v-slot:action>
-        <q-btn flat label="자세히 보기" :to="{path: `${$route.path}/${item.slug}`}"/>
+        <q-btn flat label="자세히 보기" :to="{path: `restaurants/${item.slug}`}"/>
       </template>
     </q-banner>
   </div>
@@ -44,12 +44,15 @@ export default {
   created () {
     this.fetchData()
   },
+  updated () {
+    console.log(this.$route)
+  },
   methods: {
     fetchData () {
       this.$axios.get(this.$route.path)
         .then(res => {
           this.apiRes = res.data.data
-          console.log(res.data.data)
+          // console.log(res.data.data)
         })
     }
   }

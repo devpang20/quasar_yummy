@@ -47,6 +47,12 @@
         />
       </div>
       <br>
+      <p>지도</p>
+      <q-editor v-model="mapTag" min-height="5rem" />
+      <br>
+      <p>상세설명</p>
+      <q-editor v-model="descTag" min-height="5rem" />
+      <br>
       <div>
         <q-btn v-on:click="submitData" label="Submit" color="primary" />
       </div>
@@ -63,7 +69,9 @@ export default {
       rating: 0,
       thumbnailSrc: '',
       categories: [],
-      desc: ''
+      desc: '',
+      mapTag: '',
+      descTag: ''
     }
   },
   created () {
@@ -83,7 +91,11 @@ export default {
         rating: this.rating,
         categories: this.categories,
         thumbnailSrc: (this.data) ? this.data.data[0].thumbnailSrc : null,
-        desc: this.desc
+        desc: this.desc,
+        detail: {
+          map: this.mapTag,
+          desc: this.descTag
+        }
       })
         .then(res => {
           this.$q.notify({
@@ -115,6 +127,8 @@ export default {
       this.categories = []
       this.thumbnailSrc = ''
       this.desc = ''
+      this.descTag = ''
+      this.mapTag = ''
       // 파일 삭제 밑 빈칸 방지 alert 창 수정
     }
   }
