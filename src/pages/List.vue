@@ -42,17 +42,18 @@ export default {
     }
   },
   created () {
-    this.fetchData()
+    this.fetchData(this.$route.path)
   },
-  updated () {
-    console.log(this.$route)
+  beforeRouteUpdate (to, from, next) {
+    this.fetchData(to.path)
+    next()
   },
   methods: {
-    fetchData () {
-      this.$axios.get(this.$route.path)
+    fetchData (path) {
+      this.$axios.get(path)
         .then(res => {
           this.apiRes = res.data.data
-          // console.log(res.data.data)
+          console.log(res.data.data)
         })
     }
   }
