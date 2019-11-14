@@ -15,7 +15,7 @@
           Yummy App
         </q-toolbar-title>
 
-        <div>Yummy v 0.1</div>
+        <div>Yummy v 0.3</div>
       </q-toolbar>
     </q-header>
 

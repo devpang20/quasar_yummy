@@ -12,9 +12,6 @@
     </q-field>
     <div class="desc" v-html="apiRes.desc" />
     <div class="map" v-html="apiRes.map" />
-    <div>
-      {{apiRes.comment}}
-    </div>
     <br>
     댓글쓰기
     <q-input
@@ -23,7 +20,7 @@
       label="작성자"
     />
     <q-input
-      v-model="comment"
+      v-model="content"
       filled
       type="textarea"
       label="설명"
@@ -38,20 +35,15 @@
     <div>
       <q-btn v-on:click="submitData" label="Submit" color="primary" />
     </div>
-    <div style="width: 100%; max-width: 400px">
-      <q-chat-message
-        name="me"
-        avatar="https://cdn.quasar.dev/img/avatar2.jpg"
-        :text="['hey, how are you?']"
-        sent
-        stamp="7 minutes ago"
-      />
-      <q-chat-message
-        name="Jane"
-        avatar="https://cdn.quasar.dev/img/avatar3.jpg"
-        :text="[`doing fine, how r you?`]"
-        stamp="4 minutes ago"
-      />
+    <div v-for="item in apiRes.comments" :key=item.id >
+      <div style="width: 100%; max-width: 400px">
+        <q-chat-message
+          :name="item.commentator.name"
+          avatar="../statics/icons/user.png"
+          :text="[item.content]"
+          sent
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -62,9 +54,9 @@ export default {
     return {
       apiRes: '',
       name: '',
-      actor: '',
-      comment: '',
-      rating: ''
+      commentator: '',
+      content: '',
+      rating: 0
     }
   },
   created () {
@@ -75,11 +67,41 @@ export default {
       this.$axios.get(this.$route.path)
         .then(res => {
           this.apiRes = res.data.data
-          console.log(res.data.data)
         })
     },
     submitData () {
-      console.log(1)
+      this.$axios.post(this.$route.path + '/comment', {
+        content: this.content,
+        rating: this.rating,
+        commentator: {
+          'type': 'guest',
+          'mid': '',
+          'name': this.name
+        }
+      })
+        .then(res => {
+          this.apiRes.comments.push(res.data.data)
+          this.$q.notify({
+            color: 'green-4',
+            textColor: 'white',
+            icon: 'cloud_done',
+            message: '작성 완료'
+          })
+          this.reset()
+        })
+        .catch(() => {
+          this.$q.notify({
+            color: 'red-5',
+            textColor: 'white',
+            icon: 'warning',
+            message: '모든 내용을 기입해주세요.'
+          })
+        })
+    },
+    reset () {
+      this.name = ''
+      this.content = ''
+      this.rating = 0
     }
   }
 }

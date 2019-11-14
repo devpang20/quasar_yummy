@@ -39,6 +39,7 @@
       <br>
       <div class="q-gutter-sm row items-start">
         <q-uploader
+            ref="uploader"
             url="http://yummy.taku.kr:5000/upload"
             style="max-width: 300px"
             field-name="files"
@@ -134,7 +135,7 @@ export default {
       this.desc = ''
       this.descTag = ''
       this.mapTag = ''
-      // 파일 삭제 밑 빈칸 방지 alert 창 수정
+      this.$refs.uploader.removeUploadedFiles()
     }
   }
 }
