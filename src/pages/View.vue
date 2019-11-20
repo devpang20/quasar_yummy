@@ -1,14 +1,25 @@
 <template>
   <div class="q-gutter-y-md column">
+    <br>
     <q-field outlined label="가게이름" stack-label>
       <template v-slot:control>
         <div class="self-center full-width no-outline" tabindex="0">{{apiRes.restaurant.name}}</div>
       </template>
     </q-field>
-        <q-field outlined label="설명" stack-label>
+    <q-field outlined label="설명" stack-label>
       <template v-slot:control>
         <div class="self-center full-width no-outline" tabindex="0">{{apiRes.restaurant.desc}}</div>
       </template>
+    </q-field>
+    <q-field outlined label="평점" stack-label>
+      <q-rating
+        v-model="apiRes.restaurant.score"
+        size="1.5em"
+        color="blue-5"
+        icon="star_border"
+        icon-selected="star"
+        readonly
+      />
     </q-field>
     <div class="desc" v-html="apiRes.detail.desc" />
     <div class="map" v-html="apiRes.detail.map" />
@@ -43,6 +54,14 @@
           :text="[item.content]"
           sent
         />
+        <q-rating
+          v-model="item.score"
+          size="1.5em"
+          color="blue-5"
+          icon="star_border"
+          icon-selected="star"
+          readonly
+        />
       </div>
     </div>
   </div>
@@ -54,12 +73,14 @@ export default {
     return {
       apiRes: {
         restaurant: {
+          score: 0,
           name: '',
           desc: ''
         },
         detail: {
           desc: '',
-          map: ''
+          map: '',
+          comments: []
         }
       },
       name: '',

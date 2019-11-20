@@ -27,16 +27,6 @@
         label="설명"
       />
       <br>
-      <div class="q-gutter-y-md column">
-        <q-rating
-            v-model="score"
-            size="3.5em"
-            color="blue-5"
-            icon="star_border"
-            icon-selected="star"
-        />
-      </div>
-      <br>
       <div class="q-gutter-sm row items-start">
         <q-uploader
             ref="uploader"
@@ -59,6 +49,29 @@
       <p>상세설명</p>
       <q-editor v-model="descTag" min-height="5rem" />
       <br>
+      <p>댓글쓰기<p>
+      <q-input
+        filled
+        v-model="commentator"
+        label="작성자"
+      />
+      <br>
+      <q-input
+        v-model="content"
+        filled
+        type="textarea"
+        label="설명"
+      />
+      <div class="q-gutter-y-md column">
+        <q-rating
+            v-model="score"
+            size="3.5em"
+            color="blue-5"
+            icon="star_border"
+            icon-selected="star"
+        />
+      </div>
+      <br>
       <div>
         <q-btn v-on:click="submitData" label="Submit" color="primary" />
       </div>
@@ -77,7 +90,9 @@ export default {
       categories: [],
       desc: '',
       mapTag: '',
-      descTag: ''
+      descTag: '',
+      commentator: '',
+      content: ''
     }
   },
   created () {
@@ -95,7 +110,6 @@ export default {
         restaurant: {
           slug: this.slug,
           name: this.name,
-          score: this.score,
           categories: this.categories,
           desc: this.desc,
           thumbnailSrc: (this.data) ? this.data.data[0].thumbnailSrc : null
@@ -103,6 +117,15 @@ export default {
         detail: {
           map: this.mapTag,
           desc: this.descTag
+        },
+        comment: {
+          score: this.score,
+          content: this.content,
+          commentator: {
+            'type': 'guest',
+            'mid': '',
+            'name': this.commentator
+          }
         }
       })
         .then(res => {

@@ -11,6 +11,8 @@
       <br>
       {{item.desc}}
       <br>
+      평가자수 : {{item.raters}}
+      <br>
       <q-rating
         v-model="item.score"
         size="1.5em"
@@ -38,7 +40,7 @@ export default {
       name: '',
       desc: '',
       score: '',
-      commentators: '',
+      raters: '',
       thumbnailSrc: ''
     }
   },
@@ -54,6 +56,7 @@ export default {
       this.$axios.get(path)
         .then(res => {
           this.apiRes = res.data.data
+          console.log(res.data.data)
         })
     }
   }
