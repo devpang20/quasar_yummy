@@ -2,16 +2,16 @@
   <div class="q-gutter-y-md column">
     <q-field outlined label="가게이름" stack-label>
       <template v-slot:control>
-        <div class="self-center full-width no-outline" tabindex="0">가게 이름이 들어갈거다.</div>
+        <div class="self-center full-width no-outline" tabindex="0">{{apiRes.restaurant.name}}</div>
       </template>
     </q-field>
         <q-field outlined label="설명" stack-label>
       <template v-slot:control>
-        <div class="self-center full-width no-outline" tabindex="0">설명충 들어갈거다.</div>
+        <div class="self-center full-width no-outline" tabindex="0">{{apiRes.restaurant.desc}}</div>
       </template>
     </q-field>
-    <div class="desc" v-html="apiRes.desc" />
-    <div class="map" v-html="apiRes.map" />
+    <div class="desc" v-html="apiRes.detail.desc" />
+    <div class="map" v-html="apiRes.detail.map" />
     <br>
     댓글쓰기
     <q-input
@@ -26,7 +26,7 @@
       label="설명"
     />
     <q-rating
-        v-model="rating"
+        v-model="score"
         size="3.5em"
         color="blue-5"
         icon="star_border"
@@ -35,7 +35,7 @@
     <div>
       <q-btn v-on:click="submitData" label="Submit" color="primary" />
     </div>
-    <div v-for="item in apiRes.comments" :key=item.id >
+    <div v-for="item in apiRes.detail.comments" :key=item.id >
       <div style="width: 100%; max-width: 400px">
         <q-chat-message
           :name="item.commentator.name"
@@ -52,11 +52,20 @@
 export default {
   data () {
     return {
-      apiRes: '',
+      apiRes: {
+        restaurant: {
+          name: '',
+          desc: ''
+        },
+        detail: {
+          desc: '',
+          map: ''
+        }
+      },
       name: '',
       commentator: '',
       content: '',
-      rating: 0
+      score: 0
     }
   },
   created () {
@@ -67,12 +76,13 @@ export default {
       this.$axios.get(this.$route.path)
         .then(res => {
           this.apiRes = res.data.data
+          console.log(res.data.data)
         })
     },
     submitData () {
-      this.$axios.post(this.$route.path + '/comment', {
+      this.$axios.post('restaurants/' + this.apiRes.detail.id + '/comment', {
         content: this.content,
-        rating: this.rating,
+        score: this.score,
         commentator: {
           'type': 'guest',
           'mid': '',
@@ -80,7 +90,7 @@ export default {
         }
       })
         .then(res => {
-          this.apiRes.comments.push(res.data.data)
+          this.apiRes.detail.comments.push(res.data.data)
           this.$q.notify({
             color: 'green-4',
             textColor: 'white',
@@ -101,7 +111,7 @@ export default {
     reset () {
       this.name = ''
       this.content = ''
-      this.rating = 0
+      this.score = 0
     }
   }
 }

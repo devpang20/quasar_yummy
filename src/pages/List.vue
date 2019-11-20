@@ -12,7 +12,7 @@
       {{item.desc}}
       <br>
       <q-rating
-        v-model="item.rating"
+        v-model="item.score"
         size="1.5em"
         color="blue-5"
         icon="star_border"
@@ -33,11 +33,12 @@ export default {
     return {
       apiRes: '',
       id: '',
-      categories: '',
+      categories: [],
       slug: '',
       name: '',
       desc: '',
-      rating: '',
+      score: '',
+      commentators: '',
       thumbnailSrc: ''
     }
   },

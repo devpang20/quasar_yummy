@@ -29,7 +29,7 @@
       <br>
       <div class="q-gutter-y-md column">
         <q-rating
-            v-model="rating"
+            v-model="score"
             size="3.5em"
             color="blue-5"
             icon="star_border"
@@ -72,7 +72,7 @@ export default {
       apiRes: '',
       slug: '',
       name: '',
-      rating: 0,
+      score: 0,
       thumbnailSrc: '',
       categories: [],
       desc: '',
@@ -92,12 +92,14 @@ export default {
     },
     submitData () {
       this.$axios.post('/restaurants', {
-        slug: this.slug,
-        name: this.name,
-        rating: this.rating,
-        categories: this.categories,
-        thumbnailSrc: (this.data) ? this.data.data[0].thumbnailSrc : null,
-        desc: this.desc,
+        restaurant: {
+          slug: this.slug,
+          name: this.name,
+          score: this.score,
+          categories: this.categories,
+          desc: this.desc,
+          thumbnailSrc: (this.data) ? this.data.data[0].thumbnailSrc : null
+        },
         detail: {
           map: this.mapTag,
           desc: this.descTag
@@ -129,7 +131,7 @@ export default {
     reset () {
       this.slug = ''
       this.name = ''
-      this.rating = 0
+      this.score = 0
       this.categories = []
       this.thumbnailSrc = ''
       this.desc = ''
