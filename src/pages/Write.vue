@@ -30,7 +30,7 @@
       <div class="q-gutter-sm row items-start">
         <q-uploader
             ref="uploader"
-            url="/upload"
+            url="/api/upload"
             style="max-width: 300px"
             field-name="files"
             :auto-upload="true"
