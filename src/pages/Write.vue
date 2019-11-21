@@ -30,7 +30,7 @@
       <div class="q-gutter-sm row items-start">
         <q-uploader
             ref="uploader"
-            url="http://yummy.taku.kr:5000/upload"
+            url="/upload"
             style="max-width: 300px"
             field-name="files"
             :auto-upload="true"
