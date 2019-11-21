@@ -97,7 +97,6 @@ export default {
       this.$axios.get(this.$route.path)
         .then(res => {
           this.apiRes = res.data.data
-          console.log(res.data.data)
         })
     },
     submitData () {

@@ -28,7 +28,6 @@ export default {
       this.$axios.get(path)
         .then(res => {
           this.apiRes = res.data.data
-          console.log(res.data.data)
         })
     }
   }
