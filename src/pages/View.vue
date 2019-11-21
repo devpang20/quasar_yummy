@@ -101,7 +101,7 @@ export default {
         })
     },
     submitData () {
-      this.$axios.post('restaurants/' + this.apiRes.detail.id + '/comment', {
+      this.$axios.post('restaurants/' + this.apiRes.restaurant.id + '/comment', {
         content: this.content,
         score: this.score,
         commentator: {
