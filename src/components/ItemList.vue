@@ -2,7 +2,7 @@
   <q-banner cal= "item.slug" rounded class="bg-grey-3">
     <template v-slot:avatar>
       <img
-        :src="`/${item.thumbnailSrc}`"
+        :src="`${item.thumbnailSrc}`"
         style="width: 200px; height: 110px"
       >
     </template>
